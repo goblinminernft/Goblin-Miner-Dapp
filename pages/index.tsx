@@ -1,12 +1,11 @@
-// pages/index.tsx
-
-import { ChakraProvider, Container, Box, Button, Flex, Heading, Text, Image } from '@chakra-ui/react';
+import { ChakraProvider, Container, Box, Button, Flex, Heading, Text, Image, useMediaQuery } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
 import Link from "next/link";
 const DynamicButton = dynamic(() => import('@chakra-ui/react').then((module) => ({ default: module.Button })), { ssr: false });
 
-
 const Index: React.FC = () => {
+  const [isSmallerScreen] = useMediaQuery("(max-width: 768px)");
+
   return (
     <ChakraProvider>
       <Container maxW="container.lg" centerContent>
@@ -20,13 +19,13 @@ const Index: React.FC = () => {
           </Text>
           {/* Play Now Button */}
           <Link href="/play" passHref>
-              <DynamicButton as="a" colorScheme="teal" size="lg" mt="4">
-                Play Now
-              </DynamicButton>
-            </Link>
-          <Flex>
-          <Image src="/10.png" alt="Goblin Miner" mt="6" maxW="300px" />
-          <Image src="/11.png" alt="Goblin Miner" mt="6" maxW="300px" />
+            <DynamicButton as="a" colorScheme="teal" size="lg" mt="4">
+              Play Now
+            </DynamicButton>
+          </Link>
+          <Flex direction={{ base: 'column', md: 'row' }} alignItems="center" justify="center">
+            <Image src="/10.png" alt="Goblin Miner" mt="6" maxW="300px" />
+            <Image src="/11.png" alt="Goblin Miner" mt="6" maxW="300px" />
           </Flex>
         </Box>
 
@@ -45,7 +44,7 @@ const Index: React.FC = () => {
 
         {/* How to Play Section */}
         <Flex alignItems="center" justifyContent="space-between" flexDir={{ base: 'column-reverse', md: 'row' }} padding="6">
-        <Image src="/8.png" alt="How to Play Goblin Miner" mt={{ base: '6', md: '0' }} maxW="300px" />
+          <Image src="/8.png" alt="How to Play Goblin Miner" mt={{ base: '6', md: '0' }} maxW="300px" />
           <Box textAlign="center" maxW={{ base: '100%', md: '45%' }}>
             <Heading as="h2" size="lg">
               How to Play
@@ -54,7 +53,6 @@ const Index: React.FC = () => {
               Collect goblins, equip them with tools, and explore the mines. Earn rewards by uncovering valuable resources powered by the Blue Crystal.
             </Text>
           </Box>
-          
         </Flex>
       </Container>
     </ChakraProvider>

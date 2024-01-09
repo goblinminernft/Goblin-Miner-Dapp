@@ -14,6 +14,7 @@ import {
   useMediaQuery,
   Heading,
   Button,
+  Spacer
 } from "@chakra-ui/react";
 import { ConnectWallet, useAddress, useDisconnect } from "@thirdweb-dev/react";
 import { FaBars } from "react-icons/fa";
@@ -79,17 +80,25 @@ const Navbar: React.FC<NavbarProps> = () => {
           />
         ) : (
           address && (
-            <Flex flexDirection={"row"}>
-              <Link href={"/play"}>
-                <Text mr={8}>Play</Text>
-              </Link>
-              <Link href={"/shop"}>
-                <Text mr={8}>Shop</Text>
-              </Link>
-              <Link href={`/profile/${address}`}>
-                <Text>My Wallet</Text>
-              </Link>
-            </Flex>
+            <Flex
+  flexDirection={{ base: "column", md: "row" }}
+  alignItems={{ base: "center", md: "center" }}
+>
+  <Link href={"/play"}>
+    <Text mr={8}>Play</Text>
+  </Link>
+  <Link href={"/shop"}>
+    <Text mr={8}>Shop</Text>
+  </Link>
+  <Link href={`/profile/${address}`}>
+    <Text mr={8}>My Wallet</Text>
+  </Link>
+  <Spacer />
+  <Button onClick={disconnect} colorScheme="teal">
+    Logout
+  </Button>
+</Flex>
+
           )
         )}
         <Modal isOpen={isOpen} onClose={closeMenu} size="xs">
@@ -116,24 +125,27 @@ const Navbar: React.FC<NavbarProps> = () => {
                 />
                 {address && (
                   <>
-                    <Link href={"/play"}>
-                      <Text color="white" onClick={closeMenu}>
-                        Play
-                      </Text>
-                    </Link>
-                    <Link href={"/shop"}>
-                      <Text color="white" onClick={closeMenu}>
-                        Shop
-                      </Text>
-                    </Link>
-                    <Link href={`/profile/${address}`}>
-                      <Text color="white" onClick={closeMenu}>
-                        My Wallet
-                      </Text>
-                    </Link>
-                    <Button onClick={disconnect} colorScheme="teal">
-                      Logout
-                    </Button>
+                    <Flex flexDirection={{ base: 'column', md: 'row' }}>
+  <Link href={"/play"}>
+    <Text color="white" onClick={closeMenu}>
+      Play
+    </Text>
+  </Link>
+  <Link href={"/shop"}>
+    <Text color="white" onClick={closeMenu}>
+      Shop
+    </Text>
+  </Link>
+  <Link href={`/profile/${address}`}>
+    <Text color="white" onClick={closeMenu}>
+      My Wallet
+    </Text>
+  </Link>
+  <Button onClick={disconnect} colorScheme="teal">
+    Logout
+  </Button>
+</Flex>
+
                   </>
                 )}
               </Stack>

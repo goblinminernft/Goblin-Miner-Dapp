@@ -40,8 +40,8 @@ import {
               <Box boxSize={{ base: "100%", md: "auto" }}>
                 <MediaRenderer
                   src={nft.metadata.image}
-                  height="80%"
-                  width="80%"
+                  height="150px"
+                  width="150px"
                 />
               </Box>
               <Stack spacing={3} mt={{ base: 3, md: 0 }}>
