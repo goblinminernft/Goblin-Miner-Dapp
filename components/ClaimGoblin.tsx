@@ -9,7 +9,7 @@ export function ClaimGoblin() {
     return (
         <Container maxW={"1200px"}>
             <Flex direction={"column"} alignItems={"center"} justifyContent={"center"} h={"50vh"}>
-                <Heading>Claim Goblin to start mining</Heading>
+                <Heading>Get a Goblin to start mining</Heading>
                 <Box borderRadius={"8px"} overflow={"hidden"} my={10}>
                     <MediaRenderer
                         src={metadata?.image}
@@ -21,7 +21,7 @@ export function ClaimGoblin() {
                 <Web3Button
                     contractAddress={GOBLIN_ADDRESS}
                     action={(contract) => contract.erc1155.claim(0, 1)}
-                >Claim Goblin</Web3Button>
+                >Get your own Goblin</Web3Button>
             </Flex>
         </Container>
     );

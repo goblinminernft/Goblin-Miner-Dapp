@@ -16,22 +16,10 @@ const Index: React.FC = () => {
           <Text fontSize="lg" mt="4">
             Explore the magical world of goblins and uncover treasures with Goblin Miner.
           </Text>
-          <ConnectWallet
-           theme={"dark"}
-           btnTitle={"Login"}
-           modalTitle={"Connect"}
-           switchToActiveChain={true}
-           modalSize={"wide"}
-           welcomeScreen={{}}
-           modalTitleIconUrl={""}
-            detailsBtn={() => {
-              return (
+      
                 <Link href="/play" passHref>
                   <Button as="a">Play Now</Button>
                 </Link>
-              );
-            }}
-          />
           <Flex>
           <Image src="/10.png" alt="Goblin Miner" mt="6" maxW="300px" />
           <Image src="/11.png" alt="Goblin Miner" mt="6" maxW="300px" />

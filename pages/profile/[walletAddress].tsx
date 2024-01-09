@@ -55,12 +55,6 @@ function AccountPage() {
     setTimeout(() => setIsCopied(false), 3000); // Reset copied state after 3 seconds
   }
 
-  function truncateAddress(address: string) {
-    return `${address.substring(0, 6)}...${address.substring(
-      address.length - 4
-    )}`;
-  }
-
   return (
     <Container maxW={"1440px"} py={4}>
       {address ? (

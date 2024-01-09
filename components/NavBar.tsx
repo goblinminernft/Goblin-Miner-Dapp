@@ -3,7 +3,6 @@ import {
   Container,
   Flex,
   Text,
-  Image,
   IconButton,
   Modal,
   ModalOverlay,
@@ -14,7 +13,7 @@ import {
   Stack,
   useMediaQuery,
   Heading,
-  Button,  // Import Button from Chakra UI
+  Button,
 } from "@chakra-ui/react";
 import { ConnectWallet, useAddress, useDisconnect } from "@thirdweb-dev/react";
 import { FaBars } from "react-icons/fa";
