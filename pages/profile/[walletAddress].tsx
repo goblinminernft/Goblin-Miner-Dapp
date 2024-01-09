@@ -1,4 +1,9 @@
-import { useBalance, useDisconnect, useAddress, ConnectWallet } from "@thirdweb-dev/react";
+import {
+  useBalance,
+  useDisconnect,
+  useAddress,
+  ConnectWallet,
+} from "@thirdweb-dev/react";
 import React, { useState } from "react";
 import Link from "next/link";
 import { useQRCode } from "next-qrcode";
@@ -22,7 +27,10 @@ function AccountPage() {
 
   // Replace tokenAddresses with an array of token addresses and symbols
   const tokens = [
-    { address: "0x561C94B23A63A71A4445f06445B98319cbdfaDB9", symbol: "$BLCRSTL" },
+    {
+      address: "0x561C94B23A63A71A4445f06445B98319cbdfaDB9",
+      symbol: "$BLCRSTL",
+    },
     { address: "0x5492477D2EB825867292483347685580c891627E", symbol: "$USDC" },
   ];
 
@@ -48,27 +56,30 @@ function AccountPage() {
   }
 
   function numberWithCommas(x: number | string): string {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-  
 
   return (
     <Container maxW={"1440px"} py={4}>
       {address ? (
-        
         <Flex flexDirection={["column", "column", "row"]}>
           <Link href="/play">
-              <Button mb={4}>Back</Button>
-            </Link>
-          <Flex flexDirection={"column"} mr={[0, 0, 8]} p={10} alignItems={["center"]}>
+            <Button mb={4}>Back</Button>
+          </Link>
+          <Flex
+            flexDirection={"column"}
+            mr={[0, 0, 8]}
+            p={10}
+            alignItems={["center"]}
+          >
             <ConnectWallet
-                theme={"dark"}
-                btnTitle={"Login"}
-                modalTitle={"Connect"}
-                switchToActiveChain={true}
-                modalSize={"wide"}
-                welcomeScreen={{}}
-                modalTitleIconUrl={""}
+              theme={"dark"}
+              btnTitle={"Login"}
+              modalTitle={"Connect"}
+              switchToActiveChain={true}
+              modalSize={"wide"}
+              welcomeScreen={{}}
+              modalTitleIconUrl={""}
               detailsBtn={() => {
                 return (
                   <Canvas
@@ -108,30 +119,51 @@ function AccountPage() {
             </Flex>
           </Flex>
           <Box>
-
-          <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} gap={3}>
-  {tokenBalances.map((balance) => (
-    <Box key={balance.tokenSymbol} bg="gray.100" p={4} borderRadius="md">
-      <Heading as="h3" size="md" mb={2}>
-        {balance.isLoading ? "Loading..." : `${balance.tokenSymbol}`}
-      </Heading>
-      <Text>
-        {balance.isLoading
-          ? "Loading..."
-          : balance.data
-          ? numberWithCommas(parseFloat(balance.data.displayValue).toFixed(2))
-          : `No balance available for ${balance.tokenSymbol}.`}
-      </Text>
-    </Box>
-  ))}
+            <Grid
+              templateColumns={{
+                base: "1fr",
+                md: "repeat(2, 1fr)",
+                lg: "repeat(3, 1fr)",
+              }}
+              gap={3}
+            >
+              {tokenBalances.map((balance) => (
+                <Box
+                  key={balance.tokenSymbol}
+                  bg="gray.100"
+                  p={4}
+                  borderRadius="md"
+                >
+                  <Heading as="h3" size="md" mb={2}>
+                    {balance.isLoading
+                      ? "Loading..."
+                      : `${balance.tokenSymbol}`}
+                  </Heading>
+                  <Text>
+                    {balance.isLoading
+                      ? "Loading..."
+                      : balance.data
+                      ? numberWithCommas(
+                          parseFloat(balance.data.displayValue).toFixed(2)
+                        )
+                      : `No balance available for ${balance.tokenSymbol}.`}
+                  </Text>
+                </Box>
+              ))}
 
               {/* Display native currency balance */}
               <Box bg="gray.100" p={4} borderRadius="md">
                 <Heading as="h3" size="md" mb={1}>
-                  {nativeCurrencyBalance.isLoading ? "Loading..." : "Native Currency Balance:"}
+                  {nativeCurrencyBalance.isLoading
+                    ? "Loading..."
+                    : "Native Currency Balance:"}
                 </Heading>
                 <Text>
-                  {nativeCurrencyBalance.isLoading ? "Loading..." : nativeCurrencyBalance.data ? `${nativeCurrencyBalance.data.symbol} Balance: ${nativeCurrencyBalance.data.displayValue}` : "No native currency balance available."}
+                  {nativeCurrencyBalance.isLoading
+                    ? "Loading..."
+                    : nativeCurrencyBalance.data
+                    ? `${nativeCurrencyBalance.data.symbol} Balance: ${nativeCurrencyBalance.data.displayValue}`
+                    : "No native currency balance available."}
                 </Text>
               </Box>
             </Grid>
@@ -140,13 +172,13 @@ function AccountPage() {
       ) : (
         <Flex justifyContent="center" alignItems="center" height="100vh">
           <ConnectWallet
-             theme={"dark"}
-             btnTitle={"Login"}
-             modalTitle={"Connect"}
-             switchToActiveChain={true}
-             modalSize={"wide"}
-             welcomeScreen={{}}
-             modalTitleIconUrl={""}
+            theme={"dark"}
+            btnTitle={"Login"}
+            modalTitle={"Connect"}
+            switchToActiveChain={true}
+            modalSize={"wide"}
+            welcomeScreen={{}}
+            modalTitleIconUrl={""}
             detailsBtn={() => {
               return <Text></Text>;
             }}

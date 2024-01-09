@@ -14,7 +14,7 @@ import {
   useMediaQuery,
   Heading,
   Button,
-  Spacer
+  Spacer,
 } from "@chakra-ui/react";
 import { ConnectWallet, useAddress, useDisconnect } from "@thirdweb-dev/react";
 import { FaBars } from "react-icons/fa";
@@ -29,7 +29,7 @@ const Navbar: React.FC<NavbarProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isSmallerScreen] = useMediaQuery("(max-width: 768px)");
   const [isToastShown, setIsToastShown] = useState<boolean>(false);
-  const disconnect = useDisconnect();  // Add this line to get the disconnect function
+  const disconnect = useDisconnect(); // Add this line to get the disconnect function
 
   useEffect(() => {
     // Display a toast message when the component mounts
@@ -81,24 +81,23 @@ const Navbar: React.FC<NavbarProps> = () => {
         ) : (
           address && (
             <Flex
-  flexDirection={{ base: "column", md: "row" }}
-  alignItems={{ base: "center", md: "center" }}
->
-  <Link href={"/play"}>
-    <Text mr={8}>Play</Text>
-  </Link>
-  <Link href={"/shop"}>
-    <Text mr={8}>Shop</Text>
-  </Link>
-  <Link href={`/profile/${address}`}>
-    <Text mr={8}>My Wallet</Text>
-  </Link>
-  <Spacer />
-  <Button onClick={disconnect} colorScheme="teal">
-    Logout
-  </Button>
-</Flex>
-
+              flexDirection={{ base: "column", md: "row" }}
+              alignItems={{ base: "center", md: "center" }}
+            >
+              <Link href={"/play"}>
+                <Text mr={8}>Play</Text>
+              </Link>
+              <Link href={"/shop"}>
+                <Text mr={8}>Shop</Text>
+              </Link>
+              <Link href={`/profile/${address}`}>
+                <Text mr={8}>My Wallet</Text>
+              </Link>
+              <Spacer />
+              <Button onClick={disconnect} colorScheme="teal">
+                Logout
+              </Button>
+            </Flex>
           )
         )}
         <Modal isOpen={isOpen} onClose={closeMenu} size="xs">
@@ -125,27 +124,26 @@ const Navbar: React.FC<NavbarProps> = () => {
                 />
                 {address && (
                   <>
-                    <Flex flexDirection={{ base: 'column', md: 'row' }}>
-  <Link href={"/play"}>
-    <Text color="white" onClick={closeMenu}>
-      Play
-    </Text>
-  </Link>
-  <Link href={"/shop"}>
-    <Text color="white" onClick={closeMenu}>
-      Shop
-    </Text>
-  </Link>
-  <Link href={`/profile/${address}`}>
-    <Text color="white" onClick={closeMenu}>
-      My Wallet
-    </Text>
-  </Link>
-  <Button onClick={disconnect} colorScheme="teal">
-    Logout
-  </Button>
-</Flex>
-
+                    <Flex flexDirection={{ base: "column", md: "row" }}>
+                      <Link href={"/play"}>
+                        <Text color="white" onClick={closeMenu}>
+                          Play
+                        </Text>
+                      </Link>
+                      <Link href={"/shop"}>
+                        <Text color="white" onClick={closeMenu}>
+                          Shop
+                        </Text>
+                      </Link>
+                      <Link href={`/profile/${address}`}>
+                        <Text color="white" onClick={closeMenu}>
+                          My Wallet
+                        </Text>
+                      </Link>
+                      <Button onClick={disconnect} colorScheme="teal">
+                        Logout
+                      </Button>
+                    </Flex>
                   </>
                 )}
               </Stack>
