@@ -29,8 +29,10 @@ import {
     TabList,
     TabPanels,
     Tab,
-    TabPanel
+    TabPanel,
+    Button
   } from "@chakra-ui/react";
+  import Link from "next/link";
   
   import { BigNumber, ethers } from "ethers";
   
@@ -150,14 +152,24 @@ import {
               </Box>
             </TabPanel>
             <TabPanel>
-              <Box mt={{ base: 8, md: 16 }}>
-                <Heading mb={{ base: "30px", md: "20px" }}>Equipped Tools:</Heading>
-                <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
-                  {equippedTools &&
-                    equippedTools[0].map((nft: BigNumber) => (
-                      <Equipped key={nft.toNumber()} tokenId={nft.toNumber()} />
-                    ))}
-                </SimpleGrid>
+              <Box>
+              <Heading>Equipped Tools:</Heading>
+{equippedTools && equippedTools[0].length > 0 ? (
+  <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
+    {equippedTools[0].map((nft: BigNumber) => (
+      <Equipped key={nft.toNumber()} tokenId={nft.toNumber()} />
+    ))}
+  </SimpleGrid>
+) : (
+  <div>
+    <Text>No equipped tools</Text>
+    <Link href="/inventory" passHref>
+      <Button as="a">
+        Check Inventory
+      </Button>
+    </Link>
+  </div>
+)}
               </Box>
             </TabPanel>
           </TabPanels>

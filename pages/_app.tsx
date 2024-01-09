@@ -24,6 +24,7 @@ const clientAPI= process.env.THIRDWEB_API_KEY as string;
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
+    <ChakraProvider>
     <ThirdwebProvider 
     activeChain={MantaPacificTestnet}
     clientId={clientAPI}
@@ -68,11 +69,12 @@ function MyApp({ Component, pageProps }: AppProps) {
       rainbowWallet(),
     ]}
     >
-      <ChakraProvider>
+      
         <NavBar/>
         <Component {...pageProps} />
-      </ChakraProvider>
+     
     </ThirdwebProvider>
+    </ChakraProvider>
   );
 }
 

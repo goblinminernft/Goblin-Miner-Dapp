@@ -1,8 +1,10 @@
 // pages/index.tsx
 
 import { ChakraProvider, Container, Box, Button, Flex, Heading, Text, Image } from '@chakra-ui/react';
-import { ConnectWallet } from "@thirdweb-dev/react";
+import dynamic from 'next/dynamic';
 import Link from "next/link";
+const DynamicButton = dynamic(() => import('@chakra-ui/react').then((module) => ({ default: module.Button })), { ssr: false });
+
 
 const Index: React.FC = () => {
   return (
@@ -16,10 +18,12 @@ const Index: React.FC = () => {
           <Text fontSize="lg" mt="4">
             Explore the magical world of goblins and uncover treasures with Goblin Miner.
           </Text>
-      
-                <Link href="/play" passHref>
-                  <Button as="a">Play Now</Button>
-                </Link>
+          {/* Play Now Button */}
+          <Link href="/play" passHref>
+              <DynamicButton as="a" colorScheme="teal" size="lg" mt="4">
+                Play Now
+              </DynamicButton>
+            </Link>
           <Flex>
           <Image src="/10.png" alt="Goblin Miner" mt="6" maxW="300px" />
           <Image src="/11.png" alt="Goblin Miner" mt="6" maxW="300px" />
