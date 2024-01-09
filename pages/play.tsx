@@ -35,6 +35,7 @@ import {
   import Link from "next/link";
   
   import { BigNumber, ethers } from "ethers";
+  import { calculateTotalClaimableRewards } from "../utils/calculateTotalClaimableRewards";
   
   const Play: NextPage = () => {
     const address = useAddress();
@@ -105,6 +106,33 @@ import {
   
     return (
       <Container maxW={"1200px"}>
+         <Box
+  bg="green.100"
+  p={4}
+  borderRadius="md"
+  boxShadow="md"
+  textAlign="right" // Align the content to the right
+>
+  <Text fontSize="small" fontWeight="bold">
+    $BLCRSTL Balance:
+  </Text>
+  {rewardBalance && (
+    <Text>
+    {ethers.utils
+      .formatUnits(rewardBalance, 18)
+      .split('.')
+      .map((part, index) =>
+        index === 0
+          ? part.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+          : part
+      )
+      .join('.')}
+  </Text>
+  
+  )}
+</Box>
+<br></br>
+<br></br>
         <Tabs variant="soft-rounded" colorScheme="teal">
           <TabList>
             <Tab>Goblin</Tab>
@@ -127,19 +155,7 @@ import {
                       </div>
                     ))}
                   </Box>
-                  <Box
-  bg="green.100" // Background color
-  p={4} // Padding
-  borderRadius="md" // Border radius
-  boxShadow="md" // Box shadow
->
-  <Text fontSize="small" fontWeight="bold">
-    $BLCRSTL Balance:
-  </Text>
-  {rewardBalance && (
-    <Text>{ethers.utils.formatUnits(rewardBalance, 18)}</Text>
-  )}
-</Box>
+                 
                 </SimpleGrid>
               </Box>
             </TabPanel>

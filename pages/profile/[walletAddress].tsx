@@ -3,19 +3,11 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useQRCode } from "next-qrcode";
 import {
-  Avatar,
   Container,
   Flex,
   Heading,
-  SimpleGrid,
-  Spinner,
   Text,
   Button,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
   Grid,
   Box, // Add this import for Box
 } from "@chakra-ui/react";
@@ -30,7 +22,7 @@ function AccountPage() {
 
   // Replace tokenAddresses with an array of token addresses and symbols
   const tokens = [
-    { address: "0x030050809b1EbA7F38831AC09Ce213711EF5c97C", symbol: "$BLCRSTL" },
+    { address: "0x561C94B23A63A71A4445f06445B98319cbdfaDB9", symbol: "$BLCRSTL" },
     { address: "0x5492477D2EB825867292483347685580c891627E", symbol: "$USDC" },
   ];
 
@@ -54,6 +46,11 @@ function AccountPage() {
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 3000); // Reset copied state after 3 seconds
   }
+
+  function numberWithCommas(x: number | string): string {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+  
 
   return (
     <Container maxW={"1440px"} py={4}>
@@ -112,17 +109,21 @@ function AccountPage() {
           </Flex>
           <Box>
 
-            <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} gap={3}>
-              {tokenBalances.map((balance) => (
-                <Box key={balance.tokenSymbol} bg="gray.100" p={4} borderRadius="md">
-                  <Heading as="h3" size="md" mb={2}>
-                    {balance.isLoading ? "Loading..." : `${balance.tokenSymbol}`}
-                  </Heading>
-                  <Text>
-                    {balance.isLoading ? "Loading..." : balance.data ? balance.data.displayValue : `No balance available for ${balance.tokenSymbol}.`}
-                  </Text>
-                </Box>
-              ))}
+          <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} gap={3}>
+  {tokenBalances.map((balance) => (
+    <Box key={balance.tokenSymbol} bg="gray.100" p={4} borderRadius="md">
+      <Heading as="h3" size="md" mb={2}>
+        {balance.isLoading ? "Loading..." : `${balance.tokenSymbol}`}
+      </Heading>
+      <Text>
+        {balance.isLoading
+          ? "Loading..."
+          : balance.data
+          ? numberWithCommas(parseFloat(balance.data.displayValue).toFixed(2))
+          : `No balance available for ${balance.tokenSymbol}.`}
+      </Text>
+    </Box>
+  ))}
 
               {/* Display native currency balance */}
               <Box bg="gray.100" p={4} borderRadius="md">
