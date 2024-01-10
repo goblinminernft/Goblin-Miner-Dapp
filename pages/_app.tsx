@@ -1,7 +1,7 @@
 import type { AppProps } from "next/app";
+import Head from "next/head";
 import {
   ThirdwebProvider,
-  ConnectWallet,
   metamaskWallet,
   coinbaseWallet,
   walletConnect,
@@ -60,6 +60,16 @@ function MyApp({ Component, pageProps }: AppProps) {
           rainbowWallet(),
         ]}
       >
+        <Head>
+          <title>Goblin Miners - #1 Manta Pacific Idle Game </title>
+          <meta
+            name="description"
+            content="A cool digital world where little goblins use special tools like Pickaxes to dig for treasures powered by the magical Blue Crystal! Each unique Goblin NFT is like a ticket to join the fun. Collect them, explore the mines, and earn awesome rewards. It's like having your own digital mining adventure with magical goblins!"
+          />
+          <meta property="og:image" content="/10.png" />
+          <meta name="twitter:card" content="/10.png" />
+          <meta name="twitter:image" content="/10.png" />
+        </Head>
         <NavBar />
         <Component {...pageProps} />
       </ThirdwebProvider>
