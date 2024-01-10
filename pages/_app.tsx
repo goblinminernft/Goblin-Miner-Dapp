@@ -16,11 +16,6 @@ import { ChakraProvider } from "@chakra-ui/react";
 import NavBar from "../components/NavBar";
 import "../styles/global.css";
 
-// This is the chain your dApp will work on.
-// Change this to the chain your app is built for.
-// You can also import additional chains from `@thirdweb-dev/chains` and pass them directly.
-// const activeChain = "PolygonZkevmTestnet";
-
 const clientAPI = process.env.THIRDWEB_API_KEY as string;
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -30,19 +25,24 @@ function MyApp({ Component, pageProps }: AppProps) {
         activeChain={MantaPacificTestnet}
         clientId={clientAPI}
         supportedWallets={[
-          metamaskWallet({ recommended: true }),
+          metamaskWallet(),
           coinbaseWallet(),
           walletConnect(),
           safeWallet({
             personalWallets: [
-              metamaskWallet({ recommended: true }),
+              metamaskWallet(),
               coinbaseWallet(),
               walletConnect(),
               localWallet(),
               embeddedWallet({
                 recommended: true,
                 auth: {
-                  options: ["email", "google", "apple", "facebook"],
+                  options: [
+                    "email",
+                    "google",
+                    "apple",
+                    "facebook",
+                  ],
                 },
               }),
               trustWallet(),
@@ -53,7 +53,12 @@ function MyApp({ Component, pageProps }: AppProps) {
           embeddedWallet({
             recommended: true,
             auth: {
-              options: ["email", "google", "apple", "facebook"],
+              options: [
+                "email",
+                "google",
+                "apple",
+                "facebook",
+              ],
             },
           }),
           trustWallet(),
@@ -69,6 +74,20 @@ function MyApp({ Component, pageProps }: AppProps) {
           <meta property="og:image" content="/10.png" />
           <meta name="twitter:card" content="/10.png" />
           <meta name="twitter:image" content="/10.png" />
+
+          {/* Favicon */}
+          <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+
+          {/* Apple Touch icon */}
+          <link rel="apple-touch-icon" sizes="192x192" href="/apple-touch-icon.png" />
+
+          {/* Android icons */}
+          <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
+          <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
+
+          {/* Web Manifest */}
+          <link rel="manifest" href="/site.webmanifest" />
         </Head>
         <NavBar />
         <Component {...pageProps} />
