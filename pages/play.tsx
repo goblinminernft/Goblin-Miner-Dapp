@@ -6,6 +6,8 @@ import {
   useContractRead,
   useOwnedNFTs,
 } from "@thirdweb-dev/react";
+import { useRouter } from 'next/router';
+import { useState, useRef } from 'react';
 import type { NextPage } from "next";
 import {
   GOBLIN_ADDRESS,
@@ -31,15 +33,18 @@ import {
   Tab,
   TabPanel,
   Button,
-  Image
+  Image,
 } from "@chakra-ui/react";
 import Link from "next/link";
+import GameplayAnimation from "../components/GameplayAnimation";
 
 import { BigNumber, ethers } from "ethers";
 
 const Play: NextPage = () => {
   const address = useAddress();
-
+  const router = useRouter();
+  const [selectedTab, setSelectedTab] = useState(0);
+  const tabPanelRefs = useRef<Array<HTMLDivElement | null>>([]);
   const { contract: goblinContract } = useContract(GOBLIN_ADDRESS);
   const { contract: toolsContract } = useContract(TOOLS_ADDRESS);
   const { contract: stakingContract } = useContract(STAKING_ADDRESS);
@@ -64,6 +69,16 @@ const Play: NextPage = () => {
     address,
   ]);
 
+
+  // Handle tab change
+  const handleTabChange = (index: number) => {
+    // Update the URL hash based on the selected tab
+    const tabId = ["goblin", "inventory", "equipped"][index];
+    router.push(`/play#${tabId}`, undefined, { shallow: true });
+
+    setSelectedTab(index);
+  };
+
   if (!address) {
     return (
       <Container maxW={"1200px"}>
@@ -73,7 +88,7 @@ const Play: NextPage = () => {
           justifyContent={"center"}
           alignItems={"center"}
         >
-           <Image
+          <Image
             src="/9.png"
             alt="About Goblin Miner"
             mt={{ base: "6", md: "0" }}
@@ -93,6 +108,10 @@ const Play: NextPage = () => {
       </Container>
     );
   }
+
+ 
+
+  
 
   if (loadingOwnedGoblins) {
     return (
@@ -136,16 +155,16 @@ const Play: NextPage = () => {
           </Text>
         )}
       </Box>
-      <br></br>
-      <br></br>
-      <Tabs variant="soft-rounded" colorScheme="teal">
+      <br />
+      <br />
+      <Tabs variant="soft-rounded" colorScheme="teal" index={selectedTab} onChange={handleTabChange}>
         <TabList>
           <Tab>Goblin</Tab>
           <Tab>Inventory</Tab>
           <Tab>Equipped Tools</Tab>
         </TabList>
         <TabPanels>
-          <TabPanel>
+        <TabPanel ref={(ref) => (tabPanelRefs.current[0] = ref)}>
             <Box>
               <Heading>Goblin:</Heading>
               <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
@@ -160,10 +179,11 @@ const Play: NextPage = () => {
                     </div>
                   ))}
                 </Box>
+                <GameplayAnimation equippedTools={equippedTools?.length > 0} />
               </SimpleGrid>
             </Box>
           </TabPanel>
-          <TabPanel>
+          <TabPanel ref={(ref) => (tabPanelRefs.current[1] = ref)}>
             <Box>
               <Heading>Inventory:</Heading>
               <Skeleton isLoaded={!loadingOwnedTools}>
@@ -171,7 +191,7 @@ const Play: NextPage = () => {
               </Skeleton>
             </Box>
           </TabPanel>
-          <TabPanel>
+          <TabPanel ref={(ref) => (tabPanelRefs.current[2] = ref)}>
             <Box>
               <Heading>Equipped Tools:</Heading>
               {equippedTools && equippedTools[0].length > 0 ? (
@@ -181,12 +201,17 @@ const Play: NextPage = () => {
                   ))}
                 </SimpleGrid>
               ) : (
-                <div>
+                <Flex
+                  direction="column"
+                  alignItems="center"
+                  justifyContent="center"
+                >
                   <Text>No equipped tools</Text>
-                  <Link href="/inventory" passHref>
-                    <Button as="a">Check Inventory</Button>
-                  </Link>
-                </div>
+                  {/* Link to the "Inventory" tab */}
+                  <Button as="a" onClick={() => handleTabChange(1)}>
+                    Check Inventory
+                  </Button>
+                </Flex>
               )}
             </Box>
           </TabPanel>

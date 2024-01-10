@@ -88,51 +88,54 @@ export const Equipped = (props: EquippedProps) => {
         <Card p={{ base: 2, md: 5 }}>
           <Flex
             flexDir={{ base: "column", md: "row" }}
-            justifyContent="space-between"
+            justifyContent="center"
             alignItems="center"
           >
-            <Box boxSize={{ base: "100%", md: "auto" }}>
+            <Flex flexDir="column" justifyContent="center">
               <MediaRenderer
                 src={nft.metadata.image}
                 height="150px"
                 width="150px"
               />
-            </Box>
-            <Stack spacing={3} mt={{ base: 3, md: 0 }}>
-              <Text fontSize={{ base: "lg", md: "2xl" }} fontWeight="bold">
-                {nft.metadata.name}
-              </Text>
-              <Text>
-                Equipped: {ethers.utils.formatUnits(claimableRewards[0], 0)}
-              </Text>
-              <Web3Button
-                contractAddress={STAKING_ADDRESS}
-                action={(contract) =>
-                  contract.call("withdraw", [props.tokenId, 1])
-                }
-                onSuccess={handleUnequipSuccess}
-                onError={handleUnequipError}
-                onSubmit={handleUnequipSubmit}
-              >
-                Unequip
-              </Web3Button>
-            </Stack>
+            </Flex>
+            <Flex flexDir="column" justifyContent="center">
+              <Stack spacing={3} mt={{ base: 3, md: 0 }}>
+                <Text fontSize={{ base: "lg", md: "2xl" }} fontWeight="bold">
+                  {nft.metadata.name}
+                </Text>
+                <Text>
+                <b> Equipped:</b> {ethers.utils.formatUnits(claimableRewards[0], 0)}
+                </Text>
+                <Web3Button
+                  contractAddress={STAKING_ADDRESS}
+                  action={(contract) =>
+                    contract.call("withdraw", [props.tokenId, 1])
+                  }
+                  onSuccess={handleUnequipSuccess}
+                  onError={handleUnequipError}
+                  onSubmit={handleUnequipSubmit}
+                >
+                  Unequip
+                </Web3Button>
+              
+
+                <b><Text>Claimable $BLCRSTL:</Text></b>
+                <Text>{ethers.utils.formatUnits(claimableRewards[1], 18)}</Text>
+                <Web3Button
+                  contractAddress={STAKING_ADDRESS}
+                  action={(contract) =>
+                    contract.call("claimRewards", [props.tokenId])
+                  }
+                  onSuccess={handleClaimSuccess}
+                  onError={handleClaimError}
+                  onSubmit={handleClaimSubmit}
+                >
+                  Claim
+                </Web3Button>
+              </Stack>
+            </Flex>
           </Flex>
-          <Box mt={{ base: 5, md: 0 }}>
-            <Text>Claimable $BLCRSTL:</Text>
-            <Text>{ethers.utils.formatUnits(claimableRewards[1], 18)}</Text>
-            <Web3Button
-              contractAddress={STAKING_ADDRESS}
-              action={(contract) =>
-                contract.call("claimRewards", [props.tokenId])
-              }
-              onSuccess={handleClaimSuccess}
-              onError={handleClaimError}
-              onSubmit={handleClaimSubmit}
-            >
-              Claim $BLCRSTL
-            </Web3Button>
-          </Box>
+          
         </Card>
       )}
     </Box>
