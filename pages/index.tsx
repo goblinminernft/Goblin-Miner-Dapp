@@ -2,7 +2,6 @@ import {
   ChakraProvider,
   Container,
   Box,
-  Button,
   Flex,
   Heading,
   Text,

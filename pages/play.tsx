@@ -31,6 +31,7 @@ import {
   Tab,
   TabPanel,
   Button,
+  Image
 } from "@chakra-ui/react";
 import Link from "next/link";
 
@@ -72,10 +73,16 @@ const Play: NextPage = () => {
           justifyContent={"center"}
           alignItems={"center"}
         >
+           <Image
+            src="/9.png"
+            alt="About Goblin Miner"
+            mt={{ base: "6", md: "0" }}
+            maxW="300px"
+          />
           <Heading my={"40px"}>Welcome to Goblin Miner</Heading>
           <ConnectWallet
             theme={"dark"}
-            btnTitle={"Login"}
+            btnTitle={"Get Started"}
             modalTitle={"Connect"}
             switchToActiveChain={true}
             modalSize={"wide"}
