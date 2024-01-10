@@ -35,7 +35,6 @@ import {
 import Link from "next/link";
 
 import { BigNumber, ethers } from "ethers";
-import { calculateTotalClaimableRewards } from "../utils/calculateTotalClaimableRewards";
 
 const Play: NextPage = () => {
   const address = useAddress();
