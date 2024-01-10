@@ -1,4 +1,4 @@
-import { Text, Card } from "@chakra-ui/react";
+import { Text, Card, useToast } from "@chakra-ui/react";
 import {
   MediaRenderer,
   Web3Button,
@@ -15,15 +15,42 @@ type Props = {
 
 export default function NFTComponent({ nft }: Props) {
   const { contract } = useContract(TOOLS_ADDRESS);
+  const toast = useToast();
   const { data, isLoading } = useActiveClaimCondition(
     contract,
     nft.metadata.id // Token ID required for ERC1155 contracts here.
   );
 
+  const handleBuySuccess = () => {
+    toast({
+      title: "Buy Successful",
+      description: "You have successfully bought a tool",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
+  const handleBuyError = (error: any) => {
+    console.error("Error during buy action:", error);
+    // Display an error message
+    toast({
+      title: "Buy Error",
+      description: "Something went wrong while buying a tool.",
+      status: "error",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
+  const handleBuySubmit = () => {
+    console.log("Buy transaction submitted");
+  };
+
   return (
     <Card key={nft.metadata.id} overflow={"hidden"}>
       <center>
-        <MediaRenderer src={nft.metadata.image} height="300px" width="89px" />{" "}
+        <MediaRenderer src={nft.metadata.image} height="150px" width="150px" />{" "}
       </center>
       <Text fontSize={"2xl"} fontWeight={"bold"} my={5} textAlign={"center"}>
         {nft.metadata.name}
@@ -40,6 +67,9 @@ export default function NFTComponent({ nft }: Props) {
         theme="dark"
         contractAddress={TOOLS_ADDRESS}
         action={(contract) => contract.erc1155.claim(nft.metadata.id, 1)}
+        onSuccess={handleBuySuccess}
+        onError={handleBuyError}
+        onSubmit={handleBuySubmit}
       >
         Buy
       </Web3Button>
