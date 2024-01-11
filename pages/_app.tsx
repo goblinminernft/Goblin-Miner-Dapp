@@ -14,6 +14,7 @@ import {
 import { MantaPacific, MantaPacificTestnet } from "@thirdweb-dev/chains";
 import { ChakraProvider } from "@chakra-ui/react";
 import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 import "../styles/global.css";
 
 const clientAPI = process.env.THIRDWEB_API_KEY as string;
@@ -66,7 +67,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         ]}
       >
         <Head>
-          <title>Goblin Miners - #1 Manta Pacific Idle Game </title>
+          <title>Goblin Miners - #1 Manta Pacific On-chain Play-And-Earn Game </title>
           <meta
             name="description"
             content="A cool digital world where little goblins use special tools like Pickaxes to dig for treasures powered by the magical Blue Crystal! Each unique Goblin NFT is like a ticket to join the fun. Collect them, explore the mines, and earn awesome rewards. It's like having your own digital mining adventure with magical goblins!"
@@ -91,6 +92,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Head>
         <NavBar />
         <Component {...pageProps} />
+        <Footer />
       </ThirdwebProvider>
     </ChakraProvider>
   );

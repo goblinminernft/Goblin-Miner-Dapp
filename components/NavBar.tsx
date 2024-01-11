@@ -125,25 +125,26 @@ const Navbar: React.FC<NavbarProps> = () => {
                 {address && (
                   <>
                     <Flex flexDirection={{ base: "column", md: "row" }}>
-                      <Link href={"/play"}>
-                        <Text color="white" onClick={closeMenu}>
-                          Play
-                        </Text>
-                      </Link>
-                      <Link href={"/shop"}>
-                        <Text color="white" onClick={closeMenu}>
-                          Shop
-                        </Text>
-                      </Link>
-                      <Link href={`/profile/${address}`}>
-                        <Text color="white" onClick={closeMenu}>
-                          My Wallet
-                        </Text>
-                      </Link>
-                      <Button onClick={disconnect} colorScheme="teal">
-                        Logout
-                      </Button>
-                    </Flex>
+  <Link href={"/play"}>
+    <Text color="white" onClick={closeMenu} mb={{ base: 5, md: 0 }}>
+      Play
+    </Text>
+  </Link>
+  <Link href={"/shop"}>
+    <Text color="white" onClick={closeMenu} mb={{ base: 5, md: 0 }}>
+      Shop
+    </Text>
+  </Link>
+  <Link href={`/profile/${address}`}>
+    <Text color="white" onClick={closeMenu} mb={{ base: 5, md: 0 }}>
+      My Wallet
+    </Text>
+  </Link>
+  <Button onClick={disconnect} colorScheme="teal" mt={{ base: 5, md: 0 }}>
+    Logout
+  </Button>
+</Flex>
+
                   </>
                 )}
               </Stack>
