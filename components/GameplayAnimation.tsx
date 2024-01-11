@@ -1,46 +1,39 @@
-import { useContract } from "@thirdweb-dev/react";
 import React from "react";
 import styles from "../styles/Gameplay.module.css";
 import Image from "next/image";
-import { TOOLS_ADDRESS } from "../const/addresses";
-
-interface GameplayAnimationProps {
-    equippedTools: boolean;
-}
 
 const BlueCrystal = (
   <div className={styles.slide}>
-    <Image src="/blue_crystal.gif" height="48" width="48" alt="gold-gem" />
+    <Image src="/blue_crystal.gif" height="48" width="48" alt="blue-crystal" />
   </div>
 );
 
-const GameplayAnimation: React.FC<GameplayAnimationProps> = ({ equippedTools }) => {
+type Props = {
+  equippedTools: boolean;
+};
+
+export default function GameplayAnimation({ equippedTools }: Props) {
+  if (!equippedTools) {
+    return <div style={{ marginLeft: 8 }}>I need Goblin Tools!</div>;
+  }
+
   return (
     <div className={styles.slider}>
       <div className={styles.slideTrack}>
-        {equippedTools ? (
-          <>
-            {BlueCrystal}
-            {BlueCrystal}
-            {BlueCrystal}
-            {BlueCrystal}
-            {BlueCrystal}
-            {BlueCrystal}
-            {BlueCrystal}
-            {BlueCrystal}
-            {BlueCrystal}
-            {BlueCrystal}
-            {BlueCrystal}
-            {BlueCrystal}
-            {BlueCrystal}
-            
-          </> 
-        ) : (
-          <div className={styles.noToolsMessage}>I need a Goblin Tool!</div>
-        )}
+        {BlueCrystal}
+        {BlueCrystal}
+        {BlueCrystal}
+        {BlueCrystal}
+        {BlueCrystal}
+        {BlueCrystal}
+        {BlueCrystal}
+        {BlueCrystal}
+        {BlueCrystal}
+        {BlueCrystal}
+        {BlueCrystal}
+        {BlueCrystal}
+        {BlueCrystal}
       </div>
     </div>
   );
-};
-
-export default GameplayAnimation;
+}

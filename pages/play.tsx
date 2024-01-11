@@ -69,6 +69,7 @@ const Play: NextPage = () => {
     address,
   ]);
 
+  const hasEquippedTools = equippedTools && equippedTools[0]?.length > 0;
 
   // Handle tab change
   const handleTabChange = (index: number) => {
@@ -169,6 +170,10 @@ const Play: NextPage = () => {
               <Heading>Goblin:</Heading>
               <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
                 <Box>
+                
+                <GameplayAnimation equippedTools={hasEquippedTools} />
+
+
                   {ownedGoblins?.map((nft) => (
                     <div key={nft.metadata.id}>
                       <MediaRenderer
@@ -178,8 +183,9 @@ const Play: NextPage = () => {
                       />
                     </div>
                   ))}
+                  
                 </Box>
-                <GameplayAnimation equippedTools={equippedTools?.length > 0} />
+                
               </SimpleGrid>
             </Box>
           </TabPanel>

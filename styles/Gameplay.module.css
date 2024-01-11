@@ -3,7 +3,7 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(calc(-250px * 14));
+    transform: translateX(calc(-250px * 7));
   }
 }
 
@@ -12,39 +12,39 @@
   margin: auto;
   overflow: hidden;
   position: relative;
-  width: 500px;
+  width: 100%;
+
+  /* before */
 }
 
-.slider::before,
+.slider::before {
+  content: "";
+  height: 100px;
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+  left: 0;
+  top: 0;
+}
+
 .slider::after {
   content: "";
   height: 100px;
   position: absolute;
-  width: 200px;
+  width: 100%;
   z-index: 2;
-  top: 0;
-}
-
-.slider::before {
-  left: 0;
-}
-
-.slider::after {
   right: 0;
+  top: 0;
   transform: rotateZ(180deg);
 }
 
 .slideTrack {
-  animation: scroll 14s linear infinite; /* Adjusted to match the number of BlueCrystal elements */
+  animation: scroll 50s linear infinite;
   display: flex;
-  width: calc(250px * 14);
+  width: calc(150px * 14);
 }
 
 .slide {
   height: 100px;
-  width: 250px;
-}
-
-.noToolsMessage {
-  margin-left: 8px;
+  width: 100%;
 }
